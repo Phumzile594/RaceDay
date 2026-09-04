@@ -19,8 +19,8 @@ jobs:
       - name: Verify project files
         run: |
           echo "Checking RaceDay Part 1 files..."
-          test -f README.md
-          test -f docs/RaceDay_ERD.png
-          test -f docs/RaceDay_API_Endpoint_Plan.pdf
-          test -f docs/RaceDay_Database.sql
+          test -f "README.md"
+          test -f "docs/RaceDay Part 1/RaceDay_ERD.png"
+          test -f "docs/RaceDay Part 1/RaceDay_Database.sql"
+          test -f "docs/RaceDay Part 1/Raceday API Endpoint Plan.pdf"
           echo "All required RaceDay Part 1 files are present."
