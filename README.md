@@ -9,7 +9,7 @@ The system allows Organisers to create and manage events, define event categorie
 
 Participants can register for an account, maintain their profile, view available events and categories, enrol in events and view their results.
 
-This repository contains the planning and database implementation completed for Part 1 of the RaceDay assignment.
+This repository contains the planning, database design and documentation completed for Part 1 of the RaceDay assignment.
 
 ---
 
@@ -53,8 +53,8 @@ The following Part 1 deliverables are included in this repository:
 - SQL Server database script
 - Database tables and relationships
 - Database constraints
-- Realistic sample database data
-- GitHub Actions workflow
+- Realistic sample data
+- GitHub Actions CI workflow
 - Project documentation
 - Part 1 presentation video
 
@@ -71,20 +71,9 @@ The RaceDay database contains six main entities:
 5. Enrolments
 6. Results
 
-### Main Relationships
-
-- Users have profiles
-- Organisers create events
-- Events contain categories
-- Participants have enrolments
-- Categories contain participant enrolments
-- Enrolments can have results
-
-Primary keys and foreign keys are used to maintain relationships between the database entities.
-
 ### ERD Relationships and Cardinality
 
-The main relationships represented in the ERD are:
+The main relationships are:
 
 - Users → Profile: one-to-one
 - Users → Events: one-to-many
@@ -93,32 +82,17 @@ The main relationships represented in the ERD are:
 - Categories → Enrolments: one-to-many
 - Enrolments → Results: one-to-zero-or-one
 
-These relationships allow users, events, categories, participant enrolments and race results to be connected correctly.
+Primary keys and foreign keys are used to maintain relationships and data integrity.
 
----
+The detailed ERD relationship documentation is available in:
 
-## Database Constraints
-
-The RaceDay database uses several constraints to maintain data integrity and consistency.
-
-These include:
-
-- Primary keys to uniquely identify records
-- Foreign keys to maintain relationships between tables
-- Unique constraints to prevent duplicate records
-- Check constraints to restrict invalid values
-- Default values for automatically generated dates and statuses
-- Identity columns for automatically generated IDs
-
-These constraints help ensure that valid and consistent data is stored in the RaceDay database.
+`ERD_Relationships.md`
 
 ---
 
 ## API Endpoint Plan
 
-The planned RaceDay REST API contains 14 endpoints covering authentication, profiles, events, categories, enrolments and results.
-
-### API Endpoint Summary
+The RaceDay REST API plan contains 14 endpoints covering authentication, profiles, events, categories, enrolments and results.
 
 | # | HTTP Method | Endpoint | Role |
 |---|---|---|---|
@@ -137,69 +111,180 @@ The planned RaceDay REST API contains 14 endpoints covering authentication, prof
 | 13 | POST | `/api/enrolments/{id}/results` | Organiser |
 | 14 | GET | `/api/results/my-results` | Participant |
 
-### Authentication
+The complete API Endpoint Plan is available at:
 
-The authentication functionality allows users to create accounts and log in.
+`docs/RaceDay Part 1/Raceday API Endpoint Plan.pdf`
 
-- `POST /api/auth/register` registers a new Organiser or Participant.
-- `POST /api/auth/login` authenticates an existing user.
+Additional API documentation is also included in the repository.
 
-### Profiles
+---
 
-Authenticated users can view and manage their own profile.
+## Authentication
 
-- `GET /api/profile` retrieves the logged-in user's profile.
-- `PUT /api/users/me` updates the logged-in user's profile.
+The authentication functionality allows users to register and log in.
 
-Both Organisers and Participants can manage their own profile information.
+### Register
 
-### Events
+`POST /api/auth/register`
 
-Organisers manage RaceDay events, while users can view available events.
+Allows a new Organiser or Participant to create an account.
 
-- `POST /api/events` creates a new event.
-- `GET /api/events` retrieves available events.
-- `PUT /api/events/{id}` updates an existing event.
-- `DELETE /api/events/{id}` deletes an existing event.
+### Login
 
-### Categories
+`POST /api/auth/login`
 
-Organisers can define categories for their events.
+Authenticates an existing user and returns an authentication token.
 
-- `POST /api/events/{id}/categories` creates a category for an event.
-- `GET /api/events/{id}/categories` retrieves categories for a specific event.
+Passwords are intended to be securely hashed before being stored in the database.
 
-Categories contain information such as category name, distance, maximum participants and entry fee.
+---
 
-### Enrolments
+## User Profiles
 
-Participants can enrol in event categories, while Organisers can view participant enrolments.
+Authenticated Organisers and Participants can manage their own profile information.
 
-- `POST /api/events/{id}/enrolments` allows a Participant to enrol in an event category.
-- `GET /api/events/{id}/enrolments` allows an Organiser to view event enrolments.
+### View Profile
+
+`GET /api/profile`
+
+Retrieves the currently logged-in user's profile.
+
+### Update Profile
+
+`PUT /api/users/me`
+
+Updates the currently logged-in user's profile information.
+
+---
+
+## Events
+
+Organisers are responsible for managing RaceDay events.
+
+### Create Event
+
+`POST /api/events`
+
+Creates a new event.
+
+### View Events
+
+`GET /api/events`
+
+Retrieves available events.
+
+### Update Event
+
+`PUT /api/events/{id}`
+
+Updates an existing event.
+
+### Delete Event
+
+`DELETE /api/events/{id}`
+
+Deletes an existing event.
+
+Events include information such as:
+
+- Event name
+- Description
+- Date
+- Start time
+- Location
+- Distance
+- Event type
+- Status
+
+Supported event types are:
+
+- Run
+- Walk
+- Cycle
+
+---
+
+## Categories
+
+Organisers can create categories for their events.
+
+### Create Category
+
+`POST /api/events/{id}/categories`
+
+Creates a category for a specific event.
+
+### View Categories
+
+`GET /api/events/{id}/categories`
+
+Retrieves categories belonging to an event.
+
+Categories include:
+
+- Category name
+- Distance
+- Maximum participants
+- Entry fee
+
+---
+
+## Enrolments
+
+Participants can enrol in event categories.
+
+### Create Enrolment
+
+`POST /api/events/{id}/enrolments`
+
+Allows a Participant to enrol in an event category.
+
+### View Enrolments
+
+`GET /api/events/{id}/enrolments`
+
+Allows an Organiser to view enrolments for an event.
 
 The database prevents duplicate enrolments for the same participant and category.
 
-### Results
+---
 
-Organisers can record race results, while Participants can view their own results.
+## Results
 
-- `POST /api/enrolments/{id}/results` records a participant's race result.
-- `GET /api/results/my-results` allows a Participant to view their own results.
+Organisers can record race results and Participants can view their own results.
 
-Results include information such as finish time, position and result status.
+### Record Result
 
-The complete API endpoint plan is available at:
+`POST /api/enrolments/{id}/results`
 
-`docs/RaceDay Part 1/Raceday API Endpoint Plan.pdf`
+Records a participant's race result.
+
+### View My Results
+
+`GET /api/results/my-results`
+
+Allows a Participant to view their own race results.
+
+Results include:
+
+- Finish time
+- Position
+- Result status
+- Recorded date
+
+Supported result statuses include:
+
+- Finished
+- DNF
+- DNS
 
 ---
 
 ## SQL Server Database
 
-The database was designed and tested using Microsoft SQL Server and SQL Server Management Studio (SSMS).
+The RaceDay database was designed and tested using Microsoft SQL Server and SQL Server Management Studio (SSMS).
 
-The database script creates the following tables:
+The database contains six tables:
 
 - Users
 - Profile
@@ -218,37 +303,39 @@ The SQL script includes:
 - Identity columns
 - Realistic sample data
 
-The database script is available at:
+The SQL database script is available at:
 
 `docs/RaceDay Part 1/RaceDay_Database.sql`
 
 ---
 
-## Database Table Descriptions
+## Database Constraints
 
-### Users
+The database uses constraints to maintain data integrity and consistency.
 
-Stores RaceDay user account information and user roles.
+These include:
 
-### Profile
+- Primary key constraints
+- Foreign key constraints
+- Unique constraints
+- Check constraints
+- Default constraints
+- Identity columns
 
-Stores additional profile information associated with a user.
+Examples include:
 
-### Events
+- Unique user email addresses
+- Valid Organiser and Participant roles
+- Valid Run, Walk and Cycle event types
+- Valid enrolment statuses
+- Valid result statuses
+- Positive distances and participant limits
+- Non-negative entry fees
+- Positive result positions
 
-Stores information about running, walking and cycling events.
+Additional database constraint documentation is available in:
 
-### Categories
-
-Stores categories associated with each event.
-
-### Enrolments
-
-Stores participant enrolments in event categories.
-
-### Results
-
-Stores race results associated with participant enrolments.
+`Database_Constraints.md`
 
 ---
 
@@ -263,15 +350,55 @@ The database contains realistic sample data including:
 - 5 Participant Enrolments
 - 3 Race Results
 
-The sample events include running, walking and cycling activities.
+The sample events include:
+
+- Johannesburg City Run
+- Cape Town Charity Walk
+- Pretoria Cycle Challenge
 
 The SQL script was successfully executed and tested using SQL Server Management Studio.
 
 ---
 
+## How to Run the Database
+
+### Requirements
+
+- Microsoft SQL Server
+- SQL Server Management Studio (SSMS)
+
+### Steps
+
+1. Open SQL Server Management Studio.
+2. Open `RaceDay_Database.sql` from the `docs/RaceDay Part 1` folder.
+3. Execute the SQL script.
+4. The script creates the `RaceDay` database if it does not already exist.
+5. The script creates all six required tables.
+6. The script inserts the sample data.
+7. Verify the tables and sample records in SSMS.
+
+The database script has been tested successfully in SQL Server Management Studio.
+
+---
+
 ## Entity Relationship Diagram
 
-The RaceDay ERD shows the six database entities, their attributes, primary keys, foreign keys and relationships.
+The RaceDay ERD contains six entities:
+
+- Users
+- Profile
+- Events
+- Categories
+- Enrolments
+- Results
+
+The ERD shows:
+
+- Entity attributes
+- Primary keys
+- Foreign keys
+- Relationships
+- Cardinality
 
 The ERD is available at:
 
@@ -281,22 +408,26 @@ The ERD is available at:
 
 ## Continuous Integration
 
-GitHub Actions is used to verify that the required RaceDay Part 1 project files are present in the repository.
+GitHub Actions is used to verify the required RaceDay Part 1 project files.
 
-The CI workflow is located at:
+The workflow is located at:
 
 `.github/workflows/ci.yml`
 
-The workflow runs automatically when changes are pushed to the `main` branch.
+The workflow runs when changes are pushed to the `main` branch or when a pull request targets the `main` branch.
 
-The workflow verifies the presence of:
+The CI workflow verifies the presence of:
 
-- README documentation
+- README
 - RaceDay ERD
 - API Endpoint Plan
 - SQL Server database script
 
-The latest GitHub Actions workflow completed successfully.
+The latest CI workflow completed successfully.
+
+### CI Verification Screenshot
+
+![RaceDay CI](docs/CI_Screenshot.png)
 
 ---
 
@@ -305,14 +436,27 @@ The latest GitHub Actions workflow completed successfully.
 ```text
 RaceDay/
 │
-├── docs/
-│   └── RaceDay Part 1/
-│       ├── RaceDay_ERD.png
-│       ├── Raceday API Endpoint Plan.pdf
-│       └── RaceDay_Database.sql
-│
 ├── .github/
 │   └── workflows/
 │       └── ci.yml
+│
+├── docs/
+│   ├── RaceDay Part 1/
+│   │   ├── RaceDay_ERD.png
+│   │   ├── Raceday API Endpoint Plan.pdf
+│   │   └── RaceDay_Database.sql
+│   │
+│   └── CI_Screenshot.png
+│
+├── API_Authentication.md
+├── API_Categories.md
+├── API_Enrolments.md
+├── API_Events.md
+├── API_Profile.md
+├── API_Results.md
+├── Database_Constraints.md
+├── Database_Tables.md
+├── ERD_Relationships.md
+├── Part_1_Completion.md
 │
 └── README.md
