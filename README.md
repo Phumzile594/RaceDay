@@ -139,7 +139,7 @@ The planned RaceDay REST API contains 14 endpoints covering authentication, prof
 
 ### Authentication
 
-The authentication functionality allows users to create accounts and securely log in.
+The authentication functionality allows users to create accounts and log in.
 
 - `POST /api/auth/register` registers a new Organiser or Participant.
 - `POST /api/auth/login` authenticates an existing user.
@@ -228,7 +228,7 @@ The database script is available at:
 
 ### Users
 
-Stores user account and authentication information, including the user's role.
+Stores RaceDay user account information and user roles.
 
 ### Profile
 
