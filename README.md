@@ -81,6 +81,21 @@ The RaceDay database contains the following six main entities:
 
 Primary keys and foreign keys are used to maintain relationships between the database entities.
 
+### Database Constraints
+
+The RaceDay database uses several constraints to maintain data integrity and consistency.
+
+These include:
+
+- Primary keys to uniquely identify records
+- Foreign keys to maintain relationships between tables
+- Unique constraints to prevent duplicate records
+- Check constraints to restrict invalid values
+- Default values for automatically generated dates and statuses
+- Identity columns for automatically generated IDs
+
+These constraints help ensure that valid and consistent data is stored in the RaceDay database.
+
 ---
 
 ## API Endpoint Plan
@@ -155,7 +170,7 @@ The database script is available at:
 
 ## Sample Data
 
-The database contains sample data including:
+The database contains realistic sample data including:
 
 - 2 Organisers
 - 2 Participants
@@ -187,6 +202,8 @@ The CI workflow is located at:
 `.github/workflows/ci.yml`
 
 The workflow runs automatically when changes are pushed to the `main` branch.
+
+The latest GitHub Actions workflow completed successfully.
 
 ---
 
