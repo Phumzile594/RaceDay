@@ -1,7 +1,7 @@
 https://youtube.com/shorts/d6DyYUiBvHw?si=2zpXgxWNhW7e2Vgn
-RaceDay
+# RaceDay
 
- Project Overview
+## Project Overview
 
 RaceDay is an event management system designed to manage running, walking and cycling events.
 
@@ -11,10 +11,11 @@ Participants can register for an account, maintain their profile, view available
 
 This repository contains the planning and database implementation completed for Part 1 of the RaceDay assignment.
 
+---
 
- System Roles
+## System Roles
 
- Organiser
+### Organiser
 
 Organisers are responsible for managing RaceDay events.
 
@@ -27,7 +28,7 @@ Organiser functionality includes:
 - View participant enrolments
 - Capture participant results
 
- Participant
+### Participant
 
 Participants use the system to participate in events.
 
@@ -41,8 +42,9 @@ Participant functionality includes:
 - Enrol in events
 - View their own results
 
+---
 
- Part 1 Deliverables
+## Part 1 Deliverables
 
 The following Part 1 deliverables are included in this repository:
 
@@ -55,8 +57,9 @@ The following Part 1 deliverables are included in this repository:
 - GitHub Actions workflow
 - Project documentation
 
+---
 
-Database Design
+## Database Design
 
 The RaceDay database contains the following six main entities:
 
@@ -67,7 +70,7 @@ The RaceDay database contains the following six main entities:
 5. Enrolments
 6. Results
 
-Main Relationships
+### Main Relationships
 
 - Users have profiles
 - Organisers create events
@@ -78,48 +81,51 @@ Main Relationships
 
 Primary keys and foreign keys are used to maintain relationships between the database entities.
 
- API Endpoint Plan
+---
+
+## API Endpoint Plan
 
 The planned REST API supports the following functionality:
 
-Authentication
+### Authentication
 
 - Register a new user
 - Login an existing user
 
-Profiles
+### Profiles
 
 - View the logged-in user's profile
 - Update the logged-in user's profile
 
- Events
+### Events
 
 - Create an event
 - View events
 - Update an event
 - Delete an event
 
- Categories
+### Categories
 
 - Create event categories
 - View event categories
 
-Enrolments
+### Enrolments
 
 - Enrol a participant in an event category
 - Allow organisers to view event enrolments
 
-Results
+### Results
 
 - Allow organisers to record participant results
 - Allow participants to view their own results
 
-The complete API endpoint plan is available in:
+The complete API endpoint plan is available at:
 
-`docs/RaceDay_API_Endpoint_Plan.pdf`
+`docs/RaceDay Part 1/Raceday API Endpoint Plan.pdf`
 
+---
 
-SQL Server Database
+## SQL Server Database
 
 The database was designed and tested using Microsoft SQL Server and SQL Server Management Studio (SSMS).
 
@@ -143,9 +149,11 @@ The script also includes:
 
 The database script is available at:
 
-`docs/RaceDay_Database.sql`
+`docs/RaceDay Part 1/RaceDay_Database.sql`
 
- Sample Data
+---
+
+## Sample Data
 
 The database contains sample data including:
 
@@ -158,14 +166,40 @@ The database contains sample data including:
 
 The SQL script was executed successfully in SQL Server Management Studio.
 
- Project Structure
+---
+
+## Entity Relationship Diagram
+
+The RaceDay ERD shows the six database entities, their attributes, primary keys, foreign keys and relationships.
+
+The ERD is available at:
+
+`docs/RaceDay Part 1/RaceDay_ERD.png`
+
+---
+
+## Continuous Integration
+
+GitHub Actions is used to verify that the required RaceDay Part 1 project files are present in the repository.
+
+The CI workflow is located at:
+
+`.github/workflows/ci.yml`
+
+The workflow runs automatically when changes are pushed to the `main` branch.
+
+---
+
+## Project Structure
+
 ```text
 RaceDay/
 │
 ├── docs/
-│   ├── RaceDay_ERD.png
-│   ├── RaceDay_API_Endpoint_Plan.pdf
-│   └── RaceDay_Database.sql
+│   └── RaceDay Part 1/
+│       ├── RaceDay_ERD.png
+│       ├── Raceday API Endpoint Plan.pdf
+│       └── RaceDay_Database.sql
 │
 ├── .github/
 │   └── workflows/
