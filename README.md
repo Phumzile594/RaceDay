@@ -460,3 +460,147 @@ RaceDay/
 ├── Part_1_Completion.md
 │
 └── README.md
+---
+
+# RaceDay – Part 2: ASP.NET Core Web API
+
+## Part 2 Overview
+
+Part 2 focuses on developing the RaceDay backend using ASP.NET Core Web API, Entity Framework Core, and Microsoft SQL Server.
+
+The API is designed to support event management, user authentication, participant enrolments, and race results.
+
+## Technologies Used
+
+- C#
+- ASP.NET Core Web API (.NET 8)
+- Entity Framework Core
+- SQL Server
+- Visual Studio 2022
+- Swagger / OpenAPI
+- Docker Desktop
+- GitHub and GitHub Actions
+
+## API Project Structure
+
+The `RaceDay.API` project contains the backend application.
+
+The project uses the following components:
+
+- **Controllers:** Handle incoming HTTP requests.
+- **Models:** Represent the database entities.
+- **Data:** Contains the Entity Framework Core database context.
+- **Program.cs:** Configures services and middleware.
+- **appsettings.json:** Stores application configuration.
+- **Dockerfile:** Defines the API container build.
+
+## Database Integration
+
+Entity Framework Core is used to connect the RaceDay API to Microsoft SQL Server.
+
+The database context includes the following entities:
+
+1. Users
+2. Profile
+3. Events
+4. Categories
+5. Enrolments
+6. Results
+
+The database connection is configured through the `RaceDayConnection` connection string.
+
+Database credentials should not be committed to GitHub.
+
+## User Authentication
+
+The API includes registration and login endpoints:
+
+| HTTP Method | Endpoint | Description |
+|---|---|---|
+| POST | `/api/Auth/register` | Register a user |
+| POST | `/api/Auth/login` | Log in using an existing account |
+
+Passwords are hashed before being stored in the database.
+
+The API also includes session middleware configuration.
+
+## API Testing
+
+Swagger was used to test the authentication endpoints.
+
+The following tests were completed successfully:
+
+- Participant registration
+- Participant login
+- API build using the .NET CLI
+- Accessing Swagger through the HTTPS launch profile
+
+Other planned API endpoints are documented in the Part 1 API Endpoint Plan.
+
+## Running the API
+
+### Requirements
+
+- Visual Studio 2022
+- .NET 8 SDK
+- SQL Server or SQL Server Express
+- SQL Server Management Studio
+
+### Setup Instructions
+
+1. Clone the RaceDay GitHub repository.
+2. Open the project in Visual Studio.
+3. Restore NuGet packages.
+4. Configure the `RaceDayConnection` connection string.
+5. Ensure the RaceDay SQL Server database is available.
+6. Build the `RaceDay.API` project.
+7. Run the API using the HTTPS launch profile.
+8. Open Swagger in your browser.
+
+### Terminal Commands
+
+```bash
+dotnet restore RaceDay.API/RaceDay.API.csproj
+dotnet build RaceDay.API/RaceDay.API.csproj
+dotnet run --project RaceDay.API/RaceDay.API.csproj --launch-profile https
+```
+
+### Swagger
+
+```text
+https://localhost:7094/swagger
+```
+
+The actual port may vary depending on the launch configuration.
+
+## Docker Support
+
+A Dockerfile is included in the API project.
+
+Docker Desktop was used to run the API in a container during development.
+
+Additional database networking configuration may be required for SQL Server connectivity from Docker.
+
+## Continuous Integration
+
+GitHub Actions is used for project validation.
+
+The CI workflow is located in:
+
+`.github/workflows/ci.yml`
+
+A successful Part 2 build and test run should be verified in GitHub Actions before submission.
+
+## Part 2 Video Demonstration
+
+**YouTube Video Link:** PASTE YOUR PART 2 UNLISTED YOUTUBE LINK HERE
+
+The demonstration should show the running API and explain the functionality implemented in Part 2.
+
+## Part 2 Conclusion
+
+Part 2 extends the RaceDay database design by introducing an ASP.NET Core Web API.
+
+The project includes database integration, registration and login functionality, Swagger testing, and Docker support.
+
+Further development will focus on completing the remaining event management functionality and integrating a web-based user interface.
