@@ -1,4 +1,4 @@
-https://youtu.be/cZcpyiEiN6E?si=870j-YUMvYPb59f-
+
 # RaceDay
 
 ## Project Overview
@@ -604,3 +604,265 @@ Part 2 extends the RaceDay database design by introducing an ASP.NET Core Web AP
 The project includes database integration, registration and login functionality, Swagger testing, and Docker support.
 
 Further development will focus on completing the remaining event management functionality and integrating a web-based user interface.
+# RaceDay – Part 3: ASP.NET Core MVC Website
+
+## Part 3 Overview
+
+Part 3 focuses on developing a web-based interface for the RaceDay event management system using ASP.NET Core MVC.
+
+The website connects to the existing RaceDay REST API developed in Part 2. It allows Organisers and Participants to access different features according to their roles.
+
+The aim of Part 3 is to provide a user-friendly website for managing running, walking and cycling events, participant enrolments and race results.
+
+## Technologies Used
+
+- C#
+- ASP.NET Core MVC (.NET 8)
+- ASP.NET Core Web API
+- Entity Framework Core
+- Microsoft SQL Server Express
+- Visual Studio 2026
+- HTML, CSS, Bootstrap and Razor Views
+- xUnit for unit testing
+- Git and GitHub
+- GitHub Actions
+
+## Project Structure
+
+The RaceDay solution contains three main projects:
+
+**RaceDay.API**
+
+The backend application responsible for authentication, database operations, event management, enrolments and race results.
+
+**RaceDay.Web**
+
+The ASP.NET Core MVC website containing controllers, models, services and Razor views.
+
+**RaceDay.Tests**
+
+The unit testing project used to test selected controller functionality, role restrictions and API service behaviour.
+
+## User Roles
+
+### Organiser
+
+Organisers can:
+
+- Log in to the website.
+- Access the Organiser Dashboard.
+- Create new events.
+- Edit existing events they own.
+- Delete their own events using a confirmation page.
+- Record participant race results for their own events.
+
+### Participant
+
+Participants can:
+
+- Register an account and log in.
+- Access the Participant Dashboard.
+- View available running, walking and cycling events.
+- View event categories.
+- Complete their participant profile information.
+- Enrol in event categories.
+- View their own enrolments and enrolment statuses.
+- View recorded race results, finishing times and positions.
+
+## Authentication and Authorisation
+
+RaceDay uses session-based authentication for the REST API and cookie authentication for the MVC website.
+
+Passwords are hashed before being stored in the database.
+
+Role-based access is implemented to separate Organiser and Participant functionality.
+
+Organisers cannot access Participant-only actions, and Participants cannot access Organiser-only actions.
+
+The API also checks event ownership before allowing an Organiser to update, delete or record results for an event.
+
+## MVC Features Implemented
+
+### Registration and Login
+
+Users can register as Participants and log in using their email addresses and passwords.
+
+After successful login, users are redirected to the dashboard associated with their role.
+
+### Event Management
+
+Organisers can create events by entering the event name, description, date, start time, location, distance, event type and status.
+
+Existing events can be edited, and deletion requires confirmation.
+
+### Participant Enrolment
+
+Participants can select an event category and register for an event.
+
+The enrolment process collects required profile information, including a phone number, date of birth and emergency contact details.
+
+The API checks for duplicate enrolments and category capacity.
+
+### My Enrolments
+
+Participants can view their registered events, categories, distances, entry fees and enrolment statuses.
+
+### Race Results
+
+Organisers can record finishing times, positions and result statuses for participants enrolled in their events.
+
+Participants can view their own recorded race results from the My Results page.
+
+## API Integration
+
+The MVC website communicates with the RaceDay REST API using HttpClient.
+
+The API base URL is configured in `RaceDay.Web/appsettings.json`.
+
+The API handles database operations and validates the user's session and permissions.
+
+Examples of API endpoints used:
+
+| Method | Endpoint | Purpose |
+|---|---|---|
+| POST | `/api/auth/register` | Register Participant |
+| POST | `/api/auth/login` | Log in |
+| GET | `/api/events` | View events |
+| POST | `/api/events` | Create event |
+| PUT | `/api/events/{id}` | Update event |
+| DELETE | `/api/events/{id}` | Delete event |
+| GET | `/api/events/{id}/categories` | View categories |
+| POST | `/api/events/{id}/enrolments` | Enrol Participant |
+| GET | `/api/enrolments/my-enrolments` | View personal enrolments |
+| POST | `/api/enrolments/{id}/results` | Record race result |
+| GET | `/api/results/my-results` | View personal results |
+
+## Database Integration
+
+RaceDay uses Microsoft SQL Server and Entity Framework Core.
+
+The database contains six main entities:
+
+1. Users
+2. Profile
+3. Events
+4. Categories
+5. Enrolments
+6. Results
+
+Primary keys and foreign keys maintain relationships between the entities.
+
+## How to Run RaceDay Part 3
+
+### Requirements
+
+- Visual Studio 2026 or a compatible development environment
+- .NET 8 SDK
+- SQL Server Express
+- SQL Server Management Studio
+- A local RaceDay database
+
+### Setup Instructions
+
+1. Clone the RaceDay GitHub repository.
+2. Open `RaceDay.slnx` in Visual Studio.
+3. Restore the NuGet packages.
+4. Create the RaceDay database using the provided SQL script if it has not already been created.
+5. Configure `RaceDay.API/appsettings.json` with the correct SQL Server connection string.
+6. Ensure `RaceDay.Web/appsettings.json` contains the correct API base URL.
+7. Build the solution.
+8. Start `RaceDay.API` using its HTTPS launch profile.
+9. Start `RaceDay.Web` using its HTTPS launch profile.
+10. Open the MVC website in a browser.
+
+### Local Development URLs
+
+**RaceDay API Swagger:**
+
+`https://localhost:7094/swagger`
+
+**RaceDay MVC Website:**
+
+`https://localhost:7037`
+
+Actual port numbers may vary depending on the launch configuration.
+
+### Build and Test Commands
+
+```bash
+dotnet restore RaceDay.slnx
+dotnet build RaceDay.slnx
+dotnet test RaceDay.Tests/RaceDay.Tests.csproj
+```
+
+The MVC website requires the REST API and SQL Server database to be available for database-dependent features.
+
+## Unit Testing
+
+Unit tests were implemented using xUnit.
+
+The tests cover selected functionality including:
+
+- Participant Dashboard controller behaviour
+- Organiser Dashboard controller behaviour
+- Role-based authorisation attributes
+- API service behaviour when authentication is missing
+
+The unit tests were executed locally using Visual Studio Test Explorer and passed.
+
+## Testing Completed
+
+The following functionality was manually tested:
+
+- Participant registration and login
+- Organiser login
+- Role-based access restrictions
+- Viewing available events
+- Creating an event
+- Editing an existing event
+- Deleting a temporary event
+- Participant enrolment
+- Viewing personal enrolments
+- Recording a race result
+- Viewing the recorded result as a Participant
+
+## Continuous Integration
+
+The GitHub repository includes a GitHub Actions workflow in:
+
+`.github/workflows/ci.yml`
+
+GitHub Actions provides automated checks when changes are pushed to the repository.
+
+The successful workflow status should be verified on the GitHub Actions page. The existing workflow may require additional configuration to run all Part 3 unit tests automatically.
+
+**GitHub Repository:**
+
+https://github.com/Phumzile594/RaceDay
+
+**GitHub Actions:**
+
+https://github.com/Phumzile594/RaceDay/actions
+
+## Part 3 Video Demonstration
+
+**YouTube Video Link:** ADD YOUR PART 3 UNLISTED YOUTUBE VIDEO LINK HERE
+
+The video demonstration should show:
+
+- The RaceDay website
+- Registration and login
+- Organiser and Participant dashboards
+- Event creation, editing and deletion
+- Participant enrolment
+- Recording and viewing race results
+- Successful unit tests
+- GitHub repository and CI status
+
+## Part 3 Conclusion
+
+Part 3 extends the RaceDay REST API by introducing an ASP.NET Core MVC website.
+
+The system provides separate interfaces for Organisers and Participants, allowing users to manage events, register for event categories and access race results.
+
+The project demonstrates MVC architecture, REST API integration, SQL Server database operations, role-based access control and unit testing.
