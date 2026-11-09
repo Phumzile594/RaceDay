@@ -1,4 +1,7 @@
 ﻿
+using System;
+using System.ComponentModel.DataAnnotations;
+
 namespace RaceDay.API.Models
 {
     public class Profile
@@ -7,12 +10,21 @@ namespace RaceDay.API.Models
 
         public int UserID { get; set; }
 
-        public string? PhoneNumber { get; set; }
+        [Required(ErrorMessage = "Phone number is required.")]
+        [Phone]
+        public string PhoneNumber { get; set; } = string.Empty;
 
+        [Required(ErrorMessage = "Date of birth is required.")]
+        [DataType(DataType.Date)]
         public DateTime? DateOfBirth { get; set; }
 
-        public string? EmergencyContactName { get; set; }
+        [Required(ErrorMessage = "Emergency contact name is required.")]
+        public string EmergencyContactName { get; set; }
+            = string.Empty;
 
-        public string? EmergencyContactPhone { get; set; }
+        [Required(ErrorMessage = "Emergency contact phone is required.")]
+        [Phone]
+        public string EmergencyContactPhone { get; set; }
+            = string.Empty;
     }
 }

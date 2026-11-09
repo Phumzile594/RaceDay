@@ -1,0 +1,145 @@
+﻿@model RaceDay.Web.Controllers.ParticipantController.EventEnrolmentViewModel
+
+@{
+    ViewData["Title"] = "Enrol in Event";
+}
+
+<div class="container mt-4 mb-5">
+
+    <h2>Enrol in @Model.EventName</h2>
+
+    <p class="text-muted">
+        Select a race category and complete your
+        participant profile details.
+    </p>
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["ErrorMessage"]
+        </div>
+    }
+
+    @if (Model.Categories.Count == 0)
+    {
+        <div class="alert alert-info">
+            No categories are available for this event.
+        </div>
+    }
+    else
+    {
+        <form asp-controller="Participant"
+              asp-action="Enrol"
+              method="post">
+
+            @Html.AntiForgeryToken()
+
+            <input type="hidden"
+                   name="eventId"
+                   value="@Model.EventID" />
+
+            <h4 class="mt-4">Event Category</h4>
+
+            <div class="mb-3">
+                <label for="categoryId" class="form-label">
+                    Select Category
+                </label>
+
+                <select id="categoryId"
+                        name="categoryId"
+                        class="form-select"
+                        required>
+
+                    <option value="">
+                        -- Select a category --
+                    </option>
+
+                    @foreach (var category in Model.Categories)
+                    {
+                        <option value="@category.CategoryID">
+                            @category.CategoryName -
+                            @category.DistanceKm km -
+                            R @category.EntryFee.ToString("0.00")
+                        </option>
+                    }
+                </select>
+            </div>
+
+            <hr class="my-4" />
+
+            <h4>Participant Profile Details</h4>
+
+            <p class="text-muted">
+                These details are required when creating
+                your participant profile for the first time.
+            </p>
+
+            <div class="mb-3">
+                <label for="phoneNumber" class="form-label">
+                    Phone Number
+                </label>
+
+                <input type="tel"
+                       id="phoneNumber"
+                       name="phoneNumber"
+                       class="form-control"
+                       maxlength="30"
+                       required />
+            </div>
+
+            <div class="mb-3">
+                <label for="dateOfBirth" class="form-label">
+                    Date of Birth
+                </label>
+
+                <input type="date"
+                       id="dateOfBirth"
+                       name="dateOfBirth"
+                       class="form-control"
+                       max="@DateTime.Today.ToString("yyyy-MM-dd")"
+                       required />
+            </div>
+
+            <div class="mb-3">
+                <label for="emergencyContactName"
+                       class="form-label">
+                    Emergency Contact Name
+                </label>
+
+                <input type="text"
+                       id="emergencyContactName"
+                       name="emergencyContactName"
+                       class="form-control"
+                       maxlength="150"
+                       required />
+            </div>
+
+            <div class="mb-3">
+                <label for="emergencyContactPhone"
+                       class="form-label">
+                    Emergency Contact Phone Number
+                </label>
+
+                <input type="tel"
+                       id="emergencyContactPhone"
+                       name="emergencyContactPhone"
+                       class="form-control"
+                       maxlength="30"
+                       required />
+            </div>
+
+            <div class="mt-4">
+                <button type="submit"
+                        class="btn btn-primary">
+                    Confirm Enrolment
+                </button>
+
+                <a asp-controller="Participant"
+                   asp-action="Index"
+                   class="btn btn-secondary ms-2">
+                    Cancel
+                </a>
+            </div>
+        </form>
+    }
+</div>

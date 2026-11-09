@@ -1,0 +1,75 @@
+@model List<RaceDay.Web.Controllers.RaceEventViewModel>
+
+@{
+    ViewData["Title"] = "RaceDay Events";
+}
+
+<div class="container mt-5 mb-5">
+
+    <div class="text-center mb-5">
+        <h1 class="fw-bold">Explore RaceDay Events</h1>
+        <p class="lead text-muted">
+            Find running, walking and cycling events
+            across South Africa.
+        </p>
+    </div>
+
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <div class="alert alert-danger">
+            @ViewBag.ErrorMessage
+        </div>
+    }
+    else if (Model == null || Model.Count == 0)
+    {
+        <div class="alert alert-info">
+            No events are available at the moment.
+        </div>
+    }
+    else
+    {
+        <div class="row g-4">
+            @foreach (var raceEvent in Model)
+            {
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+
+                            <h4 class="card-title text-primary fw-bold">
+                                @raceEvent.EventName
+                            </h4>
+
+                            <p>@raceEvent.Description</p>
+
+                            <p>
+                                <strong>Location:</strong>
+                                @raceEvent.Location
+                            </p>
+
+                            <p>
+                                <strong>Date:</strong>
+                                @raceEvent.EventDate.ToString("dd MMM yyyy")
+                            </p>
+
+                            <p>
+                                <strong>Distance:</strong>
+                                @raceEvent.DistanceKm km
+
+
+                            <p>
+                                <strong>Event Type:</strong>
+                                @raceEvent.EventType
+                            </p>
+
+                            <p>
+                                <strong>Status:</strong>
+                                @raceEvent.Status
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>

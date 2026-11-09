@@ -1,0 +1,136 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+<style>
+    .raceday-hero {
+        background: linear-gradient(135deg, #123c69, #2575c4);
+        color: white;
+        padding: 75px 25px;
+        border-radius: 16px;
+        text-align: center;
+        margin-bottom: 35px;
+    }
+
+    .raceday-hero h1 {
+        font-size: 46px;
+        font-weight: 800;
+        margin-bottom: 15px;
+    }
+
+    .raceday-hero p {
+        font-size: 19px;
+        max-width: 650px;
+        margin: 0 auto 25px;
+    }
+
+    .raceday-btn {
+        display: inline-block;
+        background: #ffcc00;
+        color: #172b4d;
+        padding: 12px 28px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .raceday-section {
+        margin: 45px 0;
+        text-align: center;
+    }
+
+    .raceday-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+        gap: 20px;
+        margin-top: 25px;
+    }
+
+    .raceday-card {
+        background: white;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        padding: 28px 20px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    }
+
+    .raceday-card h3 {
+        color: #123c69;
+        margin-bottom: 12px;
+    }
+
+    .raceday-card p {
+        color: #526071;
+    }
+</style>
+
+<section class="raceday-hero">
+    <h1>Welcome to RaceDay</h1>
+
+    <p>
+        Your home for running, walking and cycling events
+        across South Africa. Discover exciting events,
+        challenge yourself and celebrate every finish line.
+    </p>
+
+    <a class="raceday-btn" href="#activities">
+        Explore RaceDay
+    </a>
+</section>
+
+<section class="raceday-section" id="activities">
+    <h2>Find Your Next Challenge</h2>
+
+    <p>
+        Whether you are a beginner or an experienced athlete,
+        RaceDay helps you take part in exciting events.
+    </p>
+
+    <div class="raceday-cards">
+        <div class="raceday-card">
+            <h3>🏃 Running</h3>
+            <p>
+                Discover running races and challenge
+                yourself at different distances.
+            </p>
+        </div>
+
+        <div class="raceday-card">
+            <h3>🚶 Walking</h3>
+            <p>
+                Join walking events, stay active
+                and enjoy the experience.
+            </p>
+        </div>
+
+        <div class="raceday-card">
+            <h3>🚴 Cycling</h3>
+            <p>
+                Explore cycling events and
+                reach your next personal milestone.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="raceday-section">
+    <h2>RaceDay for Everyone</h2>
+
+    <div class="raceday-cards">
+        <div class="raceday-card">
+            <h3>Participants</h3>
+            <p>
+                Explore events, register for categories,
+                manage your profile and view race results.
+            </p>
+        </div>
+
+        <div class="raceday-card">
+            <h3>Organisers</h3>
+            <p>
+                Create events, manage categories,
+                monitor enrolments and record results.
+            </p>
+        </div>
+    </div>
+</section>

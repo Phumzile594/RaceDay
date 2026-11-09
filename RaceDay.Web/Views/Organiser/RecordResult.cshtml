@@ -1,0 +1,107 @@
+﻿@model RaceDay.Web.Controllers.OrganiserController.RecordResultViewModel
+
+@{
+    ViewData["Title"] = "Record Race Result";
+}
+
+<div class="container mt-4 mb-5">
+
+    <h2>🏅 Record Race Result</h2>
+
+    <p class="text-muted">
+        Enter the participant's enrolment ID,
+        finishing time and race position.
+    </p>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["SuccessMessage"]
+        </div>
+    }
+
+    <form asp-controller="Organiser"
+          asp-action="RecordResult"
+          method="post">
+
+        @Html.AntiForgeryToken()
+
+        <div asp-validation-summary="All"
+             class="text-danger mb-3"></div>
+
+        <div class="mb-3">
+            <label asp-for="EnrolmentID"
+                   class="form-label"></label>
+
+            <input asp-for="EnrolmentID"
+                   type="number"
+                   min="1"
+                   class="form-control" />
+
+            <span asp-validation-for="EnrolmentID"
+                  class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="FinishTime"
+                   class="form-label"></label>
+
+            <input asp-for="FinishTime"
+                   type="time"
+                   step="1"
+                   class="form-control" />
+
+            <small class="text-muted">
+                Enter the finishing time in HH:MM:SS format.
+            </small>
+
+            <span asp-validation-for="FinishTime"
+                  class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Position"
+                   class="form-label"></label>
+
+            <input asp-for="Position"
+                   type="number"
+                   min="1"
+                   class="form-control" />
+
+            <span asp-validation-for="Position"
+                  class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="ResultStatus"
+                   class="form-label"></label>
+
+            <select asp-for="ResultStatus"
+                    class="form-select">
+
+                <option value="Finished">Finished</option>
+                <option value="Disqualified">Disqualified</option>
+                <option value="Did Not Finish">Did Not Finish</option>
+
+            </select>
+
+            <span asp-validation-for="ResultStatus"
+                  class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+            Save Race Result
+        </button>
+
+        <a asp-controller="Organiser"
+           asp-action="Index"
+           class="btn btn-secondary ms-2">
+            Cancel
+        </a>
+
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

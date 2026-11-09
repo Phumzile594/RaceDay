@@ -1,0 +1,61 @@
+﻿@{
+    ViewData["Title"] = "Organiser Dashboard";
+}
+
+<div class="container my-5">
+
+    <div class="p-4 rounded-3 text-white mb-4"
+         style="background: linear-gradient(135deg, #243b55, #141e30);">
+
+        <h1 class="fw-bold">Organiser Dashboard</h1>
+        <p class="lead mb-0">
+            Welcome to RaceDay! Manage your running,
+            walking and cycling events.
+        </p>
+    </div>
+
+    <div class="row g-4">
+
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h4>🏃 Manage Events</h4>
+                    <p>Create, update and manage RaceDay events.</p>
+
+                    <a asp-controller="Events"
+                       asp-action="Index"
+                       class="btn btn-primary">
+                        View Events
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h4>📋 Manage Enrolments</h4>
+                    <p>View participants registered for events.</p>
+
+                    <span class="badge bg-secondary">
+                        Coming Soon
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h4>🏅 Manage Results</h4>
+                    <p>Capture and manage participant race results.</p>
+
+                    <span class="badge bg-secondary">
+                        Coming Soon
+                    </span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

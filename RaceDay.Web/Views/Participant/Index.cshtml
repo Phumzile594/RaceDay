@@ -1,0 +1,90 @@
+﻿@{
+    ViewData["Title"] = "Participant Dashboard";
+}
+
+<div class="container my-5">
+
+    <!-- Dashboard Header -->
+    <div class="p-4 rounded-3 text-white mb-4"
+         style="background: linear-gradient(135deg, #123c69, #2475c4);">
+
+        <h1 class="fw-bold">Participant Dashboard</h1>
+
+        <p class="lead mb-0">
+            Welcome to RaceDay! Explore events and track
+            your running, walking and cycling journey.
+        </p>
+    </div>
+
+    <!-- Dashboard Cards -->
+    <div class="row g-4">
+
+        <!-- Explore Events -->
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body d-flex flex-column">
+
+                    <h4>🏃 Explore Events</h4>
+
+                    <p>
+                        Discover available running,
+                        walking and cycling events.
+                    </p>
+
+                    <a asp-controller="Events"
+                       asp-action="Index"
+                       class="btn btn-primary mt-auto">
+                        View Events
+                    </a>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- My Enrolments -->
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body d-flex flex-column">
+
+                    <h4>📋 My Enrolments</h4>
+
+                    <p>
+                        View the events and categories
+                        you have registered for.
+                    </p>
+
+                    <a asp-controller="Participant"
+                       asp-action="MyEnrolments"
+                       class="btn btn-primary mt-auto">
+                        View My Enrolments
+                    </a>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- My Results -->
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body d-flex flex-column">
+
+                    <h4>🏅 My Results</h4>
+
+                    <p>
+                        View your race results,
+                        finishing times and positions.
+                    </p>
+
+                    <a asp-controller="Participant"
+                       asp-action="MyResults"
+                       class="btn btn-primary mt-auto">
+                        View My Results
+                    </a>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
